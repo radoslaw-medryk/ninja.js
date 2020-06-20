@@ -1,6 +1,6 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-import App from './App';
+import { mount } from 'enzyme';
+import DataTable from '..';
 
 const rows = [
   {
@@ -33,22 +33,48 @@ const rows = [
     edit_path: 'http://google.com',
     per_id: 5,
   },
+  {
+    name1: 'Emilie T. Lassen',
+    email: 'EmilieTLassen@rhyta.com',
+    edit_path: 'http://google.com',
+    per_id: 6,
+  },
+  {
+    name1: 'Maria C. Eriksen',
+    email: 'MariaCEriksen@armyspy.com',
+    edit_path: 'http://google.com',
+    per_id: 7,
+  },
+  {
+    name1: 'Julius K. Kristiansen',
+    email: 'JuliusKKristiansen@rhyta.com',
+    edit_path: 'http://google.com',
+    per_id: 8,
+  },
 ];
 
 it('renders without crashing', () => {
-  shallow(<App rows={[]} locale="da" rowsPerPage={5} />);
+  mount(<DataTable rows={[]} rowsPerPage={5} />);
 });
 
 it('renders 5 rows', () => {
-  const wrapper = mount(<App rows={rows} locale="da" rowsPerPage={5} />);
+  const wrapper = mount(<DataTable rows={rows} rowsPerPage={5} />);
 
   expect(wrapper.find('tr').length).toBe(5);
 });
 
 it('filters rows based on input', () => {
-  const wrapper = mount(<App rows={rows} locale="da" rowsPerPage={5} />);
+  const wrapper = mount(<DataTable rows={rows} rowsPerPage={5} />);
 
   wrapper.find('input').simulate('change', { target: { value: 'k' } });
 
-  expect(wrapper.find('tr').length).toBe(2);
+  expect(wrapper.find('tr').length).toBe(4);
+});
+
+it('have working pagination', () => {
+  const wrapper = mount(<DataTable rows={rows} rowsPerPage={5} />);
+
+  wrapper.find('button').at(1).simulate('click');
+
+  expect(wrapper.find('tr').length).toBe(3);
 });
