@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Page from './Page';
 
 const Pagination = ({ currentPageNumber, totalNumberOfPages, onChange }) => {
@@ -8,7 +7,7 @@ const Pagination = ({ currentPageNumber, totalNumberOfPages, onChange }) => {
       return (
         <Page
           key={pageNumber}
-          currentPageNumber={currentPageNumber}
+          isActivePage={currentPageNumber === pageNumber}
           pageNumber={pageNumber}
           onChange={onChange}
         />
@@ -19,6 +18,7 @@ const Pagination = ({ currentPageNumber, totalNumberOfPages, onChange }) => {
   if (pages.length <= 1) {
     return null;
   }
+
   return <ul className="pagination">{pages}</ul>;
 };
 

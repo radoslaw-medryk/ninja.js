@@ -1,34 +1,22 @@
 import React from 'react';
+import classNames from 'class-names';
 
-const Page = (props) => {
-  const { pageNumber, currentPageNumber, onChange } = props;
-
-  const isActivePage = () => {
-    return currentPageNumber == pageNumber;
-  };
-
-  const renderedPageNumber = () => {
-    return pageNumber + 1;
-  };
-
-  const click = (event) => {
+const Page = ({ pageNumber, isActivePage, onChange }) => {
+  function click(event) {
     event.preventDefault();
     onChange(pageNumber);
-  };
-
-  if (isActivePage()) {
-    return (
-      <li className="page-item mr-1">
-        <button className="page-link button-outline" onClick={click}>
-          {renderedPageNumber()}
-        </button>
-      </li>
-    );
   }
+
+  const renderedPageNumber = pageNumber + 1;
+
+  const buttonClassName = classNames(['page-link'], {
+    'button-outline': isActivePage,
+  });
+
   return (
     <li className="page-item mr-1">
-      <button className="page-link" onClick={click}>
-        {renderedPageNumber()}
+      <button className={buttonClassName} onClick={click}>
+        {renderedPageNumber}
       </button>
     </li>
   );
