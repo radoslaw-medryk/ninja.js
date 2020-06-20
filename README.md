@@ -13,3 +13,6 @@ To get started:
 
 To run the tests:
 - `yarn run test`
+
+To run the linter:
+- `yarn run lint`
