@@ -16,3 +16,6 @@ To run the tests:
 
 To run the linter:
 - `yarn run lint`
+
+To run prettier check:
+- `yarn run prettier`
